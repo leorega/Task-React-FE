@@ -1,4 +1,5 @@
 import { ChangeEvent, FormEvent, useState } from "react";
+import { createTaskRequest } from "../api/tasks";
 
 const TaskForm = () => {
     const [task, setTask] = useState({
@@ -11,9 +12,12 @@ const TaskForm = () => {
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => setTask({ ...task, [e.target.name]: e.target.value });
 
-    const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         console.log(task);
+        const res = await createTaskRequest(task);
+        const data = await res.json();
+        console.log(data);
     };
 
     return (
@@ -37,6 +41,9 @@ const TaskForm = () => {
                     <input
                         type="checkbox"
                         className="h-5 w-5 text-indigo-600"
+                        onChange={(e) =>
+                            setTask({ ...task, done: e.target.checked })
+                        }
                     />
                     <span>Done</span>
                 </label>
