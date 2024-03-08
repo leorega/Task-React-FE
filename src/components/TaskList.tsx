@@ -1,16 +1,8 @@
-import { useEffect, useState } from "react";
-import { getTasksRequest } from "../api/tasks";
-import { Task } from "../interfaces/Task.interface";
 import TaskItem from "./TaskItem";
+import { useTasks } from "../context/useTasks";
 
 const TaskList = () => {
-    const [tasks, setTasks] = useState<Task[]>([]);
-
-    useEffect(() => {
-        getTasksRequest()
-            .then((res) => res.json())
-            .then((data) => setTasks(data));
-    }, []);
+    const { tasks } = useTasks();
 
     return (
         <div className="border-gray-600 border-t-2 mt-2">
