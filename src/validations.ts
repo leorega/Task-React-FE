@@ -1,7 +1,7 @@
 import { CreateTask } from "./interfaces/Task.interface";
 
 export const validate = (input: CreateTask) => {
-    const errors = {};
+    const errors = { title: "", description: "" };
 
     if (!input.title) errors.title = "You must add a name";
     if (input.title.length > 50) errors.title = "The name is too long";

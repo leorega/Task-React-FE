@@ -73,7 +73,7 @@ const TaskForm = () => {
                         onChange={(e) =>
                             setTask({ ...task, done: e.target.checked })
                         }
-                        value={task.done}
+                        checked={task.done}
                     />
                     <span>Done</span>
                 </label>
