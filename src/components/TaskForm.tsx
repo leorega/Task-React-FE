@@ -14,11 +14,12 @@ const TaskForm = () => {
         description: "",
     });
 
-    const { createTask } = useTasks();
+    const { createTask, errorMessage, setErrorMessage } = useTasks();
 
     const handleChange = (
         e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
+        setErrorMessage("");
         setTask({ ...task, [e.target.name]: e.target.value });
         setErrors(
             validate({
@@ -30,7 +31,8 @@ const TaskForm = () => {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!errors.title || !errors.description) createTask(task);
+        if (!errors.title && !errors.description) createTask(task);
+
         setTask({
             title: "",
             description: "",
@@ -41,6 +43,11 @@ const TaskForm = () => {
     return (
         <div>
             <form onSubmit={handleSubmit}>
+                {errorMessage && (
+                    <span className="text-yellow-500 font-bold">
+                        {errorMessage}
+                    </span>
+                )}
                 <input
                     type="text"
                     name="title"

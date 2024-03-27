@@ -9,6 +9,8 @@ import { CreateTask, Task, UpdateTask } from "../interfaces/Task.interface";
 
 interface TaskContextValue {
     tasks: Task[];
+    errorMessage: string;
+    setErrorMessage: React.Dispatch<React.SetStateAction<string>>;
     createTask: (task: CreateTask) => Promise<void>;
     deleteTask: (id: string) => Promise<void>;
     updateTask: (id: string, task: UpdateTask) => Promise<void>;
@@ -16,6 +18,8 @@ interface TaskContextValue {
 
 export const TaskContext = createContext<TaskContextValue>({
     tasks: [],
+    errorMessage: "",
+    setErrorMessage: () => {},
     createTask: async () => {},
     deleteTask: async () => {},
     updateTask: async () => {},
@@ -27,17 +31,25 @@ interface Props {
 
 export const TaskProvider: React.FC<Props> = ({ children }) => {
     const [tasks, setTasks] = useState<Task[]>([]);
+    const [errorMessage, setErrorMessage] = useState("");
 
     useEffect(() => {
         getTasksRequest()
             .then((res) => res.json())
-            .then((data) => setTasks(data));
+            .then((data) => setTasks(data.reverse()));
     }, []);
 
     const createTask = async (task: CreateTask) => {
-        const res = await createTaskRequest(task);
-        const data = await res.json();
-        setTasks([...tasks, data]);
+        try {
+            const res = await createTaskRequest(task);
+            if (res.status === 409)
+                throw new Error("Ya existe una tarea con ese nombre");
+
+            const data = await res.json();
+            setTasks([data, ...tasks]);
+        } catch (error) {
+            setErrorMessage(error.message);
+        }
     };
 
     const deleteTask = async (id: string) => {
@@ -56,7 +68,14 @@ export const TaskProvider: React.FC<Props> = ({ children }) => {
 
     return (
         <TaskContext.Provider
-            value={{ tasks, createTask, deleteTask, updateTask }}
+            value={{
+                tasks,
+                errorMessage,
+                setErrorMessage,
+                createTask,
+                deleteTask,
+                updateTask,
+            }}
         >
             {children}
         </TaskContext.Provider>
