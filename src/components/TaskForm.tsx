@@ -41,7 +41,7 @@ const TaskForm = () => {
     };
 
     return (
-        <div>
+        <div className="mt-4">
             <form onSubmit={handleSubmit}>
                 {errorMessage && (
                     <span className="text-yellow-500 font-bold">
@@ -63,7 +63,7 @@ const TaskForm = () => {
                 <textarea
                     name="description"
                     rows={3}
-                    className="border-2 border-gray-700 p-2 rounded-lg bg-zinc-800 block w-full my-2"
+                    className="resize-none border-2 border-gray-700 p-2 rounded-lg bg-zinc-800 block w-full my-2"
                     placeholder="Descripción de la tarea"
                     onChange={handleChange}
                     value={task.description}
@@ -73,7 +73,10 @@ const TaskForm = () => {
                     <span className="text-red-500">{errors.description}</span>
                 )}
                 <br />
-                <label htmlFor="" className="inline-flex items-center gap-x-2">
+                <label
+                    htmlFor=""
+                    className="inline-flex items-center gap-x-2 mb-4"
+                >
                     <input
                         type="checkbox"
                         className="h-5 w-5 text-indigo-600"

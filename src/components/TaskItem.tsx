@@ -15,7 +15,7 @@ const TaskItem = ({ task }: Props) => {
             key={task._id}
             className="bg-gray-900 p-2 my-2 flex justify-between hover:bg-gray-800"
         >
-            <div>
+            <div className="overflow-hidden mr-4">
                 <h2 className="text-xl text-yellow-300">{task.title}</h2>
                 <p>{task.description}</p>
             </div>
