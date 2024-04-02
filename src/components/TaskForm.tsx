@@ -52,7 +52,7 @@ const TaskForm = () => {
                     type="text"
                     name="title"
                     className="border-2 border-gray-700 p-2 rounded-lg bg-zinc-800 block w-full my-2"
-                    placeholder="Write a title"
+                    placeholder="Título de la tarea"
                     onChange={handleChange}
                     value={task.title}
                     required
@@ -64,7 +64,7 @@ const TaskForm = () => {
                     name="description"
                     rows={3}
                     className="border-2 border-gray-700 p-2 rounded-lg bg-zinc-800 block w-full my-2"
-                    placeholder="Write a description"
+                    placeholder="Descripción de la tarea"
                     onChange={handleChange}
                     value={task.description}
                     required
@@ -82,10 +82,10 @@ const TaskForm = () => {
                         }
                         checked={task.done}
                     />
-                    <span>Done</span>
+                    <span>Completa</span>
                 </label>
                 <button className="bg-indigo-500 px-3 block py-2 w-full">
-                    Save
+                    Guardar
                 </button>
             </form>
         </div>

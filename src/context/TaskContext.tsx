@@ -48,7 +48,11 @@ export const TaskProvider: React.FC<Props> = ({ children }) => {
             const data = await res.json();
             setTasks([data, ...tasks]);
         } catch (error) {
-            setErrorMessage(error.message);
+            if (error instanceof Error) {
+                setErrorMessage(error.message);
+            } else {
+                console.error("Se produjo un error desconocido:", error);
+            }
         }
     };
 
