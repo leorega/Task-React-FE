@@ -1,6 +1,6 @@
 import { CreateTask, UpdateTask } from "../interfaces/Task.interface";
 
-const API = "http://localhost:3000/api";
+const API = "https://tasks-nest-be-production.up.railway.app/api";
 
 export const createTaskRequest = (task: CreateTask) =>
     fetch(`${API}/tasks`, {
