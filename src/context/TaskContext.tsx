@@ -37,10 +37,15 @@ export const TaskProvider: React.FC<Props> = ({ children }) => {
     const { user } = useAuth0();
 
     useEffect(() => {
-        getTasksRequest(user.name)
-            .then((res) => res.json())
-            .then((data) => setTasks(data.reverse()));
-    }, []);
+        if (user) {
+            const { name } = user;
+            if (name) {
+                getTasksRequest(name)
+                    .then((res) => res.json())
+                    .then((data) => setTasks(data.reverse()));
+            }
+        }
+    }, [user]);
 
     const createTask = async (task: CreateTask) => {
         try {
