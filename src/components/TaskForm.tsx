@@ -10,7 +10,7 @@ const TaskForm = () => {
         title: "",
         description: "",
         done: false,
-        user: user.name,
+        user: user?.name ? user.name : "",
     });
 
     const [errors, setErrors] = useState({
@@ -41,7 +41,7 @@ const TaskForm = () => {
             title: "",
             description: "",
             done: false,
-            user: user.name,
+            user: "",
         });
     };
 
