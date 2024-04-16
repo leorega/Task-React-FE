@@ -2,6 +2,9 @@ import { CreateTask, UpdateTask } from "../interfaces/Task.interface";
 
 const API = "https://tasks-nest-be-production.up.railway.app/api";
 
+//"https://tasks-nest-be-production.up.railway.app/api"
+//"http://localhost:3000/api"
+
 export const createTaskRequest = (task: CreateTask) =>
     fetch(`${API}/tasks`, {
         method: "POST",
@@ -11,7 +14,7 @@ export const createTaskRequest = (task: CreateTask) =>
         },
     });
 
-export const getTasksRequest = () => fetch(`${API}/tasks`);
+export const getTasksRequest = (user: string) => fetch(`${API}/tasks/${user}`);
 
 export const deleteTaskRequest = (id: string) =>
     fetch(`${API}/tasks/${id}`, { method: "DELETE" });

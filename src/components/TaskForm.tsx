@@ -1,12 +1,16 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import { useTasks } from "../context/useTasks";
 import { validate } from "../validations";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const TaskForm = () => {
+    const { user } = useAuth0();
+
     const [task, setTask] = useState({
         title: "",
         description: "",
         done: false,
+        user: user.name,
     });
 
     const [errors, setErrors] = useState({
@@ -37,6 +41,7 @@ const TaskForm = () => {
             title: "",
             description: "",
             done: false,
+            user: user.name,
         });
     };
 
@@ -87,7 +92,7 @@ const TaskForm = () => {
                     />
                     <span>Completa</span>
                 </label>
-                <button className="bg-indigo-500 px-3 block py-2 w-full">
+                <button className="bg-indigo-500 block w-full h-10 hover:border-2 box-border">
                     Guardar
                 </button>
             </form>

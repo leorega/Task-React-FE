@@ -6,6 +6,7 @@ import {
     updateTaskRequest,
 } from "../api/tasks";
 import { CreateTask, Task, UpdateTask } from "../interfaces/Task.interface";
+import { useAuth0 } from "@auth0/auth0-react";
 
 interface TaskContextValue {
     tasks: Task[];
@@ -33,8 +34,10 @@ export const TaskProvider: React.FC<Props> = ({ children }) => {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [errorMessage, setErrorMessage] = useState("");
 
+    const { user } = useAuth0();
+
     useEffect(() => {
-        getTasksRequest()
+        getTasksRequest(user.name)
             .then((res) => res.json())
             .then((data) => setTasks(data.reverse()));
     }, []);

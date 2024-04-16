@@ -1,19 +1,13 @@
-import TaskForm from "./components/TaskForm";
-import TaskList from "./components/TaskList";
-import { TaskProvider } from "./context/TaskContext";
+import { useAuth0 } from "@auth0/auth0-react";
+import LoginButton from "./components/Login";
+import Principal from "./components/Principal";
 
 const App = () => {
+    const { isAuthenticated } = useAuth0();
+
     return (
-        <div className="bg-zinc-900 min-h-screen text-white flex items-center justify-center">
-            <div className="bg-gray-950 p-4 w-full md:w-2/5">
-                <h1 className="text-3xl font-bold text-center block my2">
-                    Tasks App
-                </h1>
-                <TaskProvider>
-                    <TaskForm />
-                    <TaskList />
-                </TaskProvider>
-            </div>
+        <div className="bg-zinc-900 min-h-screen text-white flex flex-col items-center justify-center">
+            {isAuthenticated ? <Principal /> : <LoginButton />}
         </div>
     );
 };
