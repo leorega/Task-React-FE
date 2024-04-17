@@ -9,6 +9,35 @@ interface Props {
 
 const TaskItem = ({ task }: Props) => {
     const { deleteTask, updateTask } = useTasks();
+    const handleDeleteFalse = () => {
+        Swal.fire({
+            background: "#27272a",
+            toast: true,
+            color: "white",
+            title: "Tarea incompleta",
+            text: "La tarea debe estar marcada como completa para poder eliminarla",
+            confirmButtonText: "Ok",
+        });
+    };
+
+    const handleDeleteTrue = () => {
+        Swal.fire({
+            background: "#27272a",
+            toast: true,
+            color: "white",
+            title: "¿¡Querés eliminar esta tarea!?",
+            icon: "warning",
+            iconColor: "yellow",
+            confirmButtonText: "Si",
+            showCancelButton: true,
+            cancelButtonText: "No",
+            cancelButtonColor: "red",
+        }).then((result) => {
+            if (result.isConfirmed) {
+                if (task._id) deleteTask(task._id);
+            }
+        });
+    };
 
     return (
         <div
@@ -20,59 +49,22 @@ const TaskItem = ({ task }: Props) => {
                 <p>{task.description}</p>
             </div>
             <div className="flex gap-x-2 items-center">
-                {task.done ? (
-                    <IoCheckmarkDoneSharp
-                        className="text-green-600 h-8 w-8 hover:cursor-pointer"
-                        onClick={() => {
-                            if (task._id) {
-                                updateTask(task._id, {
-                                    done: !task.done,
-                                });
-                            }
-                        }}
-                    />
-                ) : (
-                    <IoCheckmarkDoneSharp
-                        className="text-gray-400 h-6 w-6 hover:cursor-pointer"
-                        onClick={() => {
-                            if (task._id) {
-                                updateTask(task._id, {
-                                    done: !task.done,
-                                });
-                            }
-                        }}
-                    />
-                )}
+                <IoCheckmarkDoneSharp
+                    className={`text-${task.done ? "green-600" : "gray-400"} ${
+                        task.done ? "h-8 w-8" : "h-6 w-6"
+                    } hover:cursor-pointer`}
+                    onClick={() => {
+                        if (task._id) {
+                            updateTask(task._id, {
+                                done: !task.done,
+                            });
+                        }
+                    }}
+                />
                 <IoTrashSharp
                     className="h-6 w-6 text-red-600 hover:cursor-pointer"
                     onClick={async () => {
-                        if (!task.done) {
-                            Swal.fire({
-                                background: "#27272a",
-                                toast: true,
-                                color: "white",
-                                title: "Tarea incompleta",
-                                text: "La tarea debe estar marcada como completa para poder eliminarla",
-                                confirmButtonText: "Ok",
-                            });
-                        } else
-                            Swal.fire({
-                                background: "#27272a",
-                                toast: true,
-                                color: "white",
-                                title: "¿¡Querés eliminar esta tarea!?",
-                                icon: "warning",
-                                iconColor: "yellow",
-                                confirmButtonText: "Si",
-                                showCancelButton: true,
-                                cancelButtonText: "No",
-                                cancelButtonColor: "red",
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    if (task._id) deleteTask(task._id);
-                                }
-                            });
-                        return;
+                        !task.done ? handleDeleteFalse() : handleDeleteTrue();
                     }}
                 />
             </div>

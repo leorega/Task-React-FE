@@ -7,7 +7,7 @@ const LoginButton = () => {
     return (
         <div className="flex flex-col items-center justify-center">
             <h1 className="text-3xl font-bold text-center block underline underline-offset-4">
-                Tasks Viewer
+                Task Viewer
             </h1>
             <FaArrowCircleDown className="my-4 text-3xl animate-pulse" />
             <button
