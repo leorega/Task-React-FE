@@ -50,7 +50,9 @@ const TaskItem = ({ task }: Props) => {
             </div>
             <div className="flex gap-x-2 items-center">
                 <IoCheckmarkDoneSharp
-                    className={`text-${task.done ? "green-600" : "gray-400"} ${
+                    className={`${
+                        task.done ? "text-green-600" : "text-gray-400"
+                    } ${
                         task.done ? "h-8 w-8" : "h-6 w-6"
                     } hover:cursor-pointer`}
                     onClick={() => {
