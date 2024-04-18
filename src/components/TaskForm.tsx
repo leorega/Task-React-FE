@@ -41,9 +41,11 @@ const TaskForm = () => {
             title: "",
             description: "",
             done: false,
-            user: "",
+            user: user?.name ? user.name : "",
         });
     };
+
+    console.log(task);
 
     return (
         <div className="mt-4">
