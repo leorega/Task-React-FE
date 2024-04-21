@@ -13,7 +13,7 @@ const Principal = () => {
 
     return (
         isAuthenticated && (
-            <div className="bg-gray-950 p-4 w-full md:w-2/5">
+            <div className="bg-gray-950 p-4 w-full md:w-3/5 lg:w-2/5">
                 <Header />
                 <TaskProvider>
                     <TaskForm />

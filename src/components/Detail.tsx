@@ -11,7 +11,7 @@ const Detail = ({ task, setIsOpen }: Props) => {
             <div
                 className={`bg-gray-950 rounded-sm border-2 ${
                     task.done ? "border-green-500" : "border-red-500"
-                } border-indigo-500 px-4 flex flex-col items-center w-4/5 md:w-2/5`}
+                } px-4 flex flex-col items-center w-4/5 md:w-2/5`}
             >
                 {task.done ? (
                     <p className="mt-2 text-green-500">Tarea completada</p>

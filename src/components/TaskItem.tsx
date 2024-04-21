@@ -44,6 +44,32 @@ const TaskItem = ({ task }: Props) => {
         });
     };
 
+    const handleComplete = () => {
+        Swal.fire({
+            background: "#27272a",
+            toast: true,
+            icon: "success",
+            iconColor: "rgb(22 163 74)",
+            color: "white",
+            title: "Tarea marcada como completa",
+            timer: 2000,
+            showConfirmButton: false,
+        });
+    };
+
+    const handlePending = () => {
+        Swal.fire({
+            background: "#27272a",
+            toast: true,
+            icon: "warning",
+            iconColor: "yellow",
+            color: "white",
+            title: "Pasaste la tarea a pendiente",
+            timer: 2000,
+            showConfirmButton: false,
+        });
+    };
+
     return (
         <div
             key={task._id}
@@ -57,12 +83,12 @@ const TaskItem = ({ task }: Props) => {
                 <h2 className="text-xl text-yellow-300">{task.title}</h2>
                 <p>{task.description}</p>
             </div>
-            <div className="flex gap-x-2 items-center">
+            <div className="flex items-center">
                 <IoCheckmarkDoneSharp
                     className={`${
-                        task.done ? "text-green-600" : "text-gray-400"
-                    } ${
-                        task.done ? "h-8 w-8" : "h-6 w-6"
+                        task.done
+                            ? "text-green-600 h-8 w-8"
+                            : "text-gray-400 h-6 w-6 mr-4"
                     } hover:cursor-pointer`}
                     onClick={() => {
                         if (task._id) {
@@ -70,14 +96,22 @@ const TaskItem = ({ task }: Props) => {
                                 done: !task.done,
                             });
                         }
+                        !task.done ? handleComplete() : handlePending();
                     }}
                 />
-                <IoTrashSharp
-                    className="h-6 w-6 text-red-600 hover:cursor-pointer"
-                    onClick={async () => {
-                        !task.done ? handleDeleteFalse() : handleDeleteTrue();
-                    }}
-                />
+                {task.done && (
+                    <section className="flex">
+                        <span className="mx-2">|</span>
+                        <IoTrashSharp
+                            className="h-6 w-6 text-red-600 hover:cursor-pointer"
+                            onClick={async () => {
+                                !task.done
+                                    ? handleDeleteFalse()
+                                    : handleDeleteTrue();
+                            }}
+                        />
+                    </section>
+                )}
             </div>
         </div>
     );
