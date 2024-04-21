@@ -2,6 +2,8 @@ import { useTasks } from "../context/useTasks";
 import { Task } from "../interfaces/Task.interface";
 import { IoCheckmarkDoneSharp, IoTrashSharp } from "react-icons/io5";
 import Swal from "sweetalert2";
+import Detail from "./Detail";
+import { useState } from "react";
 
 interface Props {
     task: Task;
@@ -9,6 +11,9 @@ interface Props {
 
 const TaskItem = ({ task }: Props) => {
     const { deleteTask, updateTask } = useTasks();
+
+    const [isOpen, setIsOpen] = useState(false);
+
     const handleDeleteFalse = () => {
         Swal.fire({
             background: "#27272a",
@@ -44,7 +49,11 @@ const TaskItem = ({ task }: Props) => {
             key={task._id}
             className="bg-gray-900 p-2 my-2 flex justify-between hover:bg-gray-800"
         >
-            <div className="overflow-hidden mr-4">
+            {isOpen && <Detail task={task} setIsOpen={setIsOpen} />}
+            <div
+                className="overflow-hidden mr-4 cursor-pointer min-w-[70%] md:min-w-[80%]"
+                onClick={() => setIsOpen(true)}
+            >
                 <h2 className="text-xl text-yellow-300">{task.title}</h2>
                 <p>{task.description}</p>
             </div>

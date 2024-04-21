@@ -45,8 +45,6 @@ const TaskForm = () => {
         });
     };
 
-    console.log(task);
-
     return (
         <div className="mt-4">
             <form onSubmit={handleSubmit}>
@@ -79,21 +77,6 @@ const TaskForm = () => {
                 {errors.description && (
                     <span className="text-red-500">{errors.description}</span>
                 )}
-                <br />
-                <label
-                    htmlFor=""
-                    className="inline-flex items-center gap-x-2 mb-4"
-                >
-                    <input
-                        type="checkbox"
-                        className="h-5 w-5 text-indigo-600"
-                        onChange={(e) =>
-                            setTask({ ...task, done: e.target.checked })
-                        }
-                        checked={task.done}
-                    />
-                    <span>Completa</span>
-                </label>
                 <button className="bg-indigo-500 block w-full h-10 hover:border-2 box-border">
                     Guardar
                 </button>
