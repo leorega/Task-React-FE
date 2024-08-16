@@ -6,12 +6,28 @@ const LoginButton = () => {
 
     return (
         <div className="flex flex-col items-center justify-center">
-            <h1 className="text-3xl font-bold text-center block underline underline-offset-4">
-                Task Viewer
+            <h1 className="text-3xl font-bold text-center block underline text-yellow-300 underline-offset-4">
+                <span className="text-indigo-500">Task</span>
+                {Array.from(" Viewer").map((char, index) => {
+                    const colors = [
+                        "text-red-500",
+                        "text-green-500",
+                        "text-yellow-300",
+                    ];
+                    return (
+                        <span
+                            key={index}
+                            className={colors[index % colors.length]}
+                        >
+                            {char}
+                        </span>
+                    );
+                })}
             </h1>
-            <FaArrowCircleDown className="my-4 text-3xl animate-pulse" />
+
+            <FaArrowCircleDown className="my-4 text-3xl animate-pulse text-indigo-500" />
             <button
-                className="bg-indigo-300 text-black px-3 block py-2 w-full hover:bg-indigo-500 hover:text-white duration-500"
+                className="bg-indigo-800 text-white px-3 block py-2 w-full rounded-md hover:bg-indigo-500 hover:text-black duration-500"
                 onClick={() => loginWithRedirect()}
             >
                 Ingresar

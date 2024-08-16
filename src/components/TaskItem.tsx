@@ -71,48 +71,62 @@ const TaskItem = ({ task }: Props) => {
     };
 
     return (
-        <div
-            key={task._id}
-            className="bg-gray-900 p-2 my-2 flex justify-between hover:bg-gray-800"
-        >
+        <div key={task._id} className="bg-gray-900 p-2 my-2 hover:bg-gray-800">
             {isOpen && <Detail task={task} setIsOpen={setIsOpen} />}
-            <div
-                className="overflow-hidden mr-4 cursor-pointer min-w-[70%] md:min-w-[80%]"
+            <section
+                className="flex justify-between items-center cursor-pointer"
                 onClick={() => setIsOpen(true)}
             >
-                <h2 className="text-xl text-yellow-300">{task.title}</h2>
-                <p>{task.description}</p>
-            </div>
-            <div className="flex items-center">
-                <IoCheckmarkDoneSharp
-                    className={`${
-                        task.done
-                            ? "text-green-600 h-8 w-8"
-                            : "text-gray-400 h-6 w-6 mr-4"
-                    } hover:cursor-pointer`}
-                    onClick={() => {
-                        if (task._id) {
-                            updateTask(task._id, {
-                                done: !task.done,
-                            });
-                        }
-                        !task.done ? handleComplete() : handlePending();
-                    }}
-                />
-                {task.done && (
-                    <section className="flex">
-                        <span className="mx-2">|</span>
-                        <IoTrashSharp
-                            className="h-6 w-6 text-red-600 hover:cursor-pointer"
-                            onClick={async () => {
-                                !task.done
-                                    ? handleDeleteFalse()
-                                    : handleDeleteTrue();
-                            }}
-                        />
-                    </section>
-                )}
-            </div>
+                <h2 className="text-xl text-yellow-300 whitespace-nowrap overflow-hidden text-ellipsis">
+                    {task.title}
+                </h2>
+                <p className="text-sm text-yellow-300 whitespace-nowrap">
+                    {task.createdAt
+                        ?.toLocaleString()
+                        .slice(0, 10)
+                        .split("-")
+                        .reverse()
+                        .join("-")}
+                </p>
+            </section>
+            <section className="flex justify-between">
+                <div
+                    className="overflow-hidden mr-4 cursor-pointer min-w-[70%] md:min-w-[80%]"
+                    onClick={() => setIsOpen(true)}
+                >
+                    <p>{task.description}</p>
+                </div>
+                <div className="flex items-center">
+                    <IoCheckmarkDoneSharp
+                        className={`${
+                            task.done
+                                ? "text-green-600 h-8 w-8"
+                                : "text-gray-400 h-6 w-6 mr-4 hover:h-8 hover:w-8"
+                        } hover:cursor-pointer`}
+                        onClick={() => {
+                            if (task._id) {
+                                updateTask(task._id, {
+                                    done: !task.done,
+                                });
+                            }
+                            !task.done ? handleComplete() : handlePending();
+                        }}
+                    />
+                    {task.done && (
+                        <aside className="flex">
+                            <span className="mx-2">|</span>
+                            <IoTrashSharp
+                                className="h-6 w-6 text-red-600 hover:cursor-pointer"
+                                onClick={async () => {
+                                    !task.done
+                                        ? handleDeleteFalse()
+                                        : handleDeleteTrue();
+                                }}
+                            />
+                        </aside>
+                    )}
+                </div>
+            </section>
         </div>
     );
 };

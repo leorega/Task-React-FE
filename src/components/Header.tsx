@@ -12,7 +12,22 @@ const Header = () => {
                 alt={user?.name}
             />
             <h1 className="text-3xl font-bold text-center block my2">
-                Task Viewer
+                <span className="text-indigo-500">Task</span>
+                {Array.from(" Viewer").map((char, index) => {
+                    const colors = [
+                        "text-red-500",
+                        "text-green-500",
+                        "text-yellow-300",
+                    ];
+                    return (
+                        <span
+                            key={index}
+                            className={colors[index % colors.length]}
+                        >
+                            {char}
+                        </span>
+                    );
+                })}
             </h1>
             <LogoutButton />
         </div>

@@ -77,7 +77,7 @@ const TaskForm = () => {
                 {errors.description && (
                     <span className="text-red-500">{errors.description}</span>
                 )}
-                <button className="bg-indigo-500 block w-full h-10 hover:border-2 box-border">
+                <button className="bg-indigo-500 text-black block w-full h-10 rounded-sm font-bold hover:bg-indigo-800 hover:text-white hover:border-2 hover:font-bold duration-500 box-border">
                     Guardar
                 </button>
             </form>
