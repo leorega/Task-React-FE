@@ -2,6 +2,7 @@ export interface Task {
     _id?: string;
     title: string;
     description?: string;
+    priority: string;
     user: string;
     done?: boolean;
     createdAt?: Date;

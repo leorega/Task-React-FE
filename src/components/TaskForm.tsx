@@ -10,12 +10,14 @@ const TaskForm = () => {
         title: "",
         description: "",
         done: false,
+        priority: "",
         user: user?.name ? user.name : "",
     });
 
     const [errors, setErrors] = useState({
         title: "",
         description: "",
+        priority: "",
     });
 
     const { createTask, errorMessage, setErrorMessage } = useTasks();
@@ -35,12 +37,14 @@ const TaskForm = () => {
 
     const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        if (!errors.title && !errors.description) createTask(task);
+        if (!errors.title && !errors.description && !errors.priority)
+            createTask(task);
 
         setTask({
             title: "",
             description: "",
             done: false,
+            priority: "",
             user: user?.name ? user.name : "",
         });
     };
@@ -77,6 +81,68 @@ const TaskForm = () => {
                 {errors.description && (
                     <span className="text-red-500">{errors.description}</span>
                 )}
+
+                <div className="my-4">
+                    <div className="flex gap-4">
+                        <div>
+                            <input
+                                hidden={true}
+                                id="priority-importante"
+                                className="mr-2 peer"
+                                type="radio"
+                                name="priority"
+                                value="importante"
+                                onChange={handleChange}
+                                checked={task.priority === "importante"}
+                            />
+                            <label
+                                htmlFor="priority-importante"
+                                className="flex items-center border-2 border-red-500 p-2 rounded-md text-red-500 cursor-pointer peer-checked:bg-red-500 peer-checked:text-white"
+                            >
+                                Importante
+                            </label>
+                        </div>
+                        <div>
+                            <input
+                                hidden={true}
+                                id="priority-normal"
+                                type="radio"
+                                name="priority"
+                                value="normal"
+                                onChange={handleChange}
+                                checked={task.priority === "normal"}
+                                className="mr-2 peer"
+                            />
+                            <label
+                                htmlFor="priority-normal"
+                                className="flex items-center border-2 border-yellow-300 p-2 rounded-md text-yellow-300 cursor-pointer peer-checked:bg-yellow-300 peer-checked:text-black"
+                            >
+                                Normal
+                            </label>
+                        </div>
+                        <div>
+                            <input
+                                hidden={true}
+                                id="priority-tranqui"
+                                type="radio"
+                                name="priority"
+                                value="tranqui"
+                                onChange={handleChange}
+                                checked={task.priority === "tranqui"}
+                                className="mr-2 peer"
+                            />
+                            <label
+                                htmlFor="priority-tranqui"
+                                className="flex items-center border-2 border-green-500 p-2 rounded-md text-green-500 cursor-pointer peer-checked:bg-green-500 peer-checked:text-white"
+                            >
+                                Tranqui
+                            </label>
+                        </div>
+                    </div>
+                    {errors.priority && (
+                        <span className="text-red-500">{errors.priority}</span>
+                    )}
+                </div>
                 <button className="bg-indigo-500 text-black block w-full h-10 rounded-sm font-bold hover:bg-indigo-800 hover:text-white hover:border-2 hover:font-bold duration-500 box-border">
                     Guardar
                 </button>

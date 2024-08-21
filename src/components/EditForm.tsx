@@ -59,13 +59,69 @@ const EditForm = ({ task, setIsOpenEdit }: Props) => {
                         value={editTask.description}
                         required
                     ></textarea>
-
+                    <div className="my-4">
+                        <div className="flex gap-4">
+                            <div>
+                                <input
+                                    hidden={true}
+                                    id="priority-importante"
+                                    className="mr-2 peer"
+                                    type="radio"
+                                    name="priority"
+                                    value="importante"
+                                    onChange={handleChange}
+                                    checked={task.priority === "importante"}
+                                />
+                                <label
+                                    htmlFor="priority-importante"
+                                    className="flex items-center border-2 border-red-500 p-2 rounded-md text-red-500 cursor-pointer peer-checked:bg-red-500 peer-checked:text-white"
+                                >
+                                    Importante
+                                </label>
+                            </div>
+                            <div>
+                                <input
+                                    hidden={true}
+                                    id="priority-normal"
+                                    type="radio"
+                                    name="priority"
+                                    value="normal"
+                                    onChange={handleChange}
+                                    checked={task.priority === "normal"}
+                                    className="mr-2 peer"
+                                />
+                                <label
+                                    htmlFor="priority-normal"
+                                    className="flex items-center border-2 border-yellow-300 p-2 rounded-md text-yellow-300 cursor-pointer peer-checked:bg-yellow-300 peer-checked:text-black"
+                                >
+                                    Normal
+                                </label>
+                            </div>
+                            <div>
+                                <input
+                                    hidden={true}
+                                    id="priority-tranqui"
+                                    type="radio"
+                                    name="priority"
+                                    value="tranqui"
+                                    onChange={handleChange}
+                                    checked={task.priority === "tranqui"}
+                                    className="mr-2 peer"
+                                />
+                                <label
+                                    htmlFor="priority-tranqui"
+                                    className="flex items-center border-2 border-green-500 p-2 rounded-md text-green-500 cursor-pointer peer-checked:bg-green-500 peer-checked:text-white"
+                                >
+                                    Tranqui
+                                </label>
+                            </div>
+                        </div>
+                    </div>
                     <button className="bg-indigo-500 block w-full h-10 hover:border-2 box-border">
                         Guardar
                     </button>
                 </form>
                 <CloseButton onClick={() => setIsOpenEdit(false)} />
-                {/* <button onClick={() => setIsOpenEdit(false)}>Cerrar</button> */}
             </div>
         </div>
     );

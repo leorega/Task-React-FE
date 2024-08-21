@@ -71,7 +71,19 @@ const TaskItem = ({ task }: Props) => {
     };
 
     return (
-        <div key={task._id} className="bg-gray-900 p-2 my-2 hover:bg-gray-800">
+        <div
+            key={task._id}
+            className={`${
+                task.priority === "importante" &&
+                "bg-red-300 border-2 border-red-500"
+            } ${
+                task.priority === "normal" &&
+                "bg-yellow-300  border-2 border-yellow-300"
+            } ${
+                task.priority === "tranqui" &&
+                "bg-green-300  border-2 border-green-500"
+            } p-2 my-2 bg-opacity-5 hover:shadow-sm hover:shadow-indigo-500`}
+        >
             {isOpen && <Detail task={task} setIsOpen={setIsOpen} />}
             <section
                 className="flex justify-between items-center cursor-pointer"
