@@ -1,8 +1,8 @@
 import { CreateTask, UpdateTask } from "../interfaces/Task.interface";
 
-const API = "https://task-viewer-be.onrender.com";
+const API = "https://task-viewer-be.onrender.com/api";
 
-//"https://task-viewer-be.onrender.com"
+//"https://task-viewer-be.onrender.com/api"
 //"https://tasks-nest-be-production.up.railway.app/api" <= Expiró la prueba gratuita
 //"http://localhost:3000/api"
 
