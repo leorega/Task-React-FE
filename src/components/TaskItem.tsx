@@ -75,14 +75,14 @@ const TaskItem = ({ task }: Props) => {
             key={task._id}
             className={`${
                 task.priority === "importante" &&
-                "bg-red-300 border-2 border-red-500"
+                "bg-red-300 border-2 border-red-500 hover:shadow-sm hover:shadow-red-500"
             } ${
                 task.priority === "normal" &&
-                "bg-yellow-300  border-2 border-yellow-300"
+                "bg-yellow-300  border-2 border-yellow-300  hover:shadow-sm hover:shadow-yellow-300"
             } ${
                 task.priority === "tranqui" &&
-                "bg-green-300  border-2 border-green-500"
-            } p-2 my-2 bg-opacity-5 hover:shadow-sm hover:shadow-indigo-500`}
+                "bg-green-300  border-2 border-green-500  hover:shadow-sm hover:shadow-green-500"
+            } p-2 my-2 bg-opacity-5`}
         >
             {isOpen && <Detail task={task} setIsOpen={setIsOpen} />}
             <section

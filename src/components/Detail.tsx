@@ -17,10 +17,15 @@ const Detail = ({ task, setIsOpen }: Props) => {
                 <EditForm task={task} setIsOpenEdit={setIsOpenEdit} />
             )}
             <div
-                className={`bg-gray-950 rounded-sm border-2 ${
-                    task.priority === "importante" && "border-red-500"
-                } ${task.priority === "normal" && "border-yellow-300"} ${
-                    task.priority === "tranqui" && "border-green-500"
+                className={`bg-slate-950 rounded-sm border-2 ${
+                    task.priority === "importante" &&
+                    "border-red-500 shadow-red-500 shadow-md"
+                } ${
+                    task.priority === "normal" &&
+                    "border-yellow-300 shadow-md shadow-yellow-300"
+                } ${
+                    task.priority === "tranqui" &&
+                    "border-green-500 shadow-md shadow-green-500"
                 } p-4 flex flex-col items-center w-4/5 md:w-2/5 relative`}
             >
                 {task.done ? (
