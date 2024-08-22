@@ -4,6 +4,7 @@ import {
     deleteTaskRequest,
     getTasksRequest,
     updateTaskRequest,
+    getTasksByPriorityRequest,
 } from "../api/tasks";
 import { CreateTask, Task, UpdateTask } from "../interfaces/Task.interface";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -15,6 +16,7 @@ interface TaskContextValue {
     createTask: (task: CreateTask) => Promise<void>;
     deleteTask: (id: string) => Promise<void>;
     updateTask: (id: string, task: UpdateTask) => Promise<void>;
+    getTasksByPriority: (user: string, priority: string) => Promise<void>;
 }
 
 export const TaskContext = createContext<TaskContextValue>({
@@ -24,6 +26,7 @@ export const TaskContext = createContext<TaskContextValue>({
     createTask: async () => {},
     deleteTask: async () => {},
     updateTask: async () => {},
+    getTasksByPriority: async () => {},
 });
 
 interface Props {
@@ -78,6 +81,12 @@ export const TaskProvider: React.FC<Props> = ({ children }) => {
         );
     };
 
+    const getTasksByPriority = async (user: string, priority: string) => {
+        const res = await getTasksByPriorityRequest(user, priority);
+        const data = await res.json();
+        setTasks(data);
+    };
+
     return (
         <TaskContext.Provider
             value={{
@@ -87,6 +96,7 @@ export const TaskProvider: React.FC<Props> = ({ children }) => {
                 createTask,
                 deleteTask,
                 updateTask,
+                getTasksByPriority,
             }}
         >
             {children}

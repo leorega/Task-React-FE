@@ -1,6 +1,6 @@
 import { CreateTask, UpdateTask } from "../interfaces/Task.interface";
 
-const API = "https://task-viewer-be.onrender.com/api";
+const API = "https://task-viewer-be.onrender.com";
 
 //"https://task-viewer-be.onrender.com"
 //"https://tasks-nest-be-production.up.railway.app/api" <= Expiró la prueba gratuita
@@ -16,6 +16,9 @@ export const createTaskRequest = (task: CreateTask) =>
     });
 
 export const getTasksRequest = (user: string) => fetch(`${API}/tasks/${user}`);
+
+export const getTasksByPriorityRequest = (user: string, priority: string) =>
+    fetch(`${API}/tasks/${user}/priority/${priority}`);
 
 export const deleteTaskRequest = (id: string) =>
     fetch(`${API}/tasks/${id}`, { method: "DELETE" });
