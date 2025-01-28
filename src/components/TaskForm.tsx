@@ -55,18 +55,34 @@ const TaskForm = () => {
     return (
         <div className="mt-4">
             <div
-                onClick={() => setIsFormVisible(!isFormVisible)}
-                className="w-full flex-col items-center justify-center"
+                onClick={() => {
+                    if (isFormVisible) {
+                        setTask({
+                            title: "",
+                            description: "",
+                            done: false,
+                            priority: "",
+                            user: user?.name ? user.name : "",
+                        });
+                        setErrors({
+                            title: "",
+                            description: "",
+                            priority: "",
+                        });
+                    }
+                    setIsFormVisible(!isFormVisible);
+                }}
+                className="w-1/4 flex-col items-center justify-center mx-auto"
             >
                 <h3 className="text-center text-xl">Crear tarea</h3>
                 {!isFormVisible ? (
-                    <FaArrowCircleDown className="mx-auto text-3xl my-1 animate-pulse text-indigo-500" />
+                    <FaArrowCircleDown className="mx-auto text-3xl my-1 animate-pulse text-indigo-500 cursor-pointer" />
                 ) : (
-                    <FaArrowCircleUp className="mx-auto text-3xl my-1 animate-pulse text-indigo-500" />
+                    <FaArrowCircleUp className="mx-auto text-3xl my-1 animate-pulse text-indigo-500 cursor-pointer" />
                 )}
             </div>
             <div
-                className={`overflow-hidden transition-all duration-500 ease-in-out ${
+                className={`p-2 overflow-hidden transition-all duration-500 ease-in-out ${
                     isFormVisible
                         ? "max-h-[1000px] opacity-100"
                         : "max-h-0 opacity-0"

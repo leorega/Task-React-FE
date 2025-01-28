@@ -23,8 +23,8 @@ const TaskList = () => {
                 <h2 className="font-bold text-2xl text-center">
                     Lista de tareas
                 </h2>
-                <div className="flex justify-between gap-1">
-                    <div className="">
+                <div className="grid xs:flex justify-between gap-1">
+                    <div className="mb-2 xs:mb-0">
                         <input
                             hidden={true}
                             id="allTasks"
@@ -41,7 +41,7 @@ const TaskList = () => {
                             Todas
                         </label>
                     </div>
-                    <div className="">
+                    <div className="mb-2 xs:mb-0">
                         <input
                             hidden={true}
                             id="prioridad-importante"
@@ -58,7 +58,7 @@ const TaskList = () => {
                             Importante
                         </label>
                     </div>
-                    <div className="">
+                    <div className="mb-2 xs:mb-0">
                         <input
                             hidden={true}
                             id="prioridad-normal"
